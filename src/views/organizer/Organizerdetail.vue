@@ -1,8 +1,8 @@
 <template>
   <p>{{GStore.organizer.name}}</p>
  
-  <img v-for="url in GStore.organizer.imageUrls" :key="url" :src="url" />
- 
+  <!-- <img v-for="url in GStore.organizer.imageUrls" :key="url" :src="url" /> -->
+ <img  :src ="GStore.organizer.imageUrls[0]"  />
  <!-- <router-view :organizer= "GStore.organizer" /> -->
 </template>
 
