@@ -23,7 +23,7 @@
       <h3>
         The image of the Event
       </h3>
-      <UploadImages />
+      <UploadImages @change="handleImages"/>
       <button type="submit">Submit</button>
     </form>
 
@@ -67,6 +67,9 @@ export default {
         .catch(() => {
           this.$router.push('NetworkError')
         })
+    },
+    handleImages(files){
+      console.log(files)
     }
   }
 }
