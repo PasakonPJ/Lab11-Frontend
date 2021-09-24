@@ -20,8 +20,9 @@
         v-model="event.organizer.id"
         label="Select an Organizer"
       /> -->
+        <BaseInput v-model="organizer.name" type="text" label="Name" />
 
-      <h3>The image of the Event</h3>
+      <h3>The image of the Organizer</h3>
       <UploadImages @changed="handleImages" />
 
       <button type="submit">Submit</button>
@@ -43,7 +44,7 @@ export default {
   data() {
     return {
       organizer: {
-        // category: '',
+        name: '',
         // title: '',
         // description: '',
         // location: '',
@@ -64,12 +65,12 @@ export default {
           this.organizer.imageUrls = response.map((r) => r.data)
           OrganizerService.saveOrganizers(this.organizer).then((response) => {
             console.log(response)
-            // this.$router.push({
-            //   name: 'EventLayout',
-            //   params: { id: response.data.id }
-            // })
+            this.$router.push({
+              name: 'LayoutOrganizer',
+              params: { id: response.data.id }
+            })
             this.GStore.flashMessage =
-              'You are successfully add a new organizer for ' 
+              'You are successfully add a new organizer ' 
             //   + response.data.title
             setTimeout(() => {
               this.GStore.flashMessage = ''

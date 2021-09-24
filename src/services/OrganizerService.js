@@ -9,6 +9,9 @@ const apiClient = axios.create({
   }
 })
 export default {
+  getOrganizer(id) {
+    return apiClient.get('/organizers/'+ id)
+  },
   getOrganizers() {
     return apiClient.get('/organizers')
   },
