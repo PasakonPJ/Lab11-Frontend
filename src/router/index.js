@@ -7,6 +7,7 @@ import EventEdit from '@/views/event/Edit.vue'
 import EventLayout from '@/views/event/Layout.vue'
 import NotFound from '@/views/NotFound.vue'
 import AddEvent from '@/views/EventForm.vue'
+import AddOrganizer from '@/views/OrganizerForm.vue'
 import NetWorkError from '@/views/NetworkError.vue'
 import NProgress from 'nprogress'
 import EventService from '@/services/EventService.js'
@@ -24,6 +25,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+  path: '/add-Organizer',
+  name: 'AddOrganizer',
+  component: AddOrganizer
   },
   {
     path: '/add-event',
