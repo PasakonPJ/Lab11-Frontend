@@ -20,10 +20,10 @@
         v-model="event.organizer.id"
         label="Select an Organizer"
       />
-      <h3>
-        The image of the Event
-      </h3>
-      <UploadImages @change="handleImages"/>
+
+      <h3>The image of the Event</h3>
+      <UploadImages @changed="handleImages" />
+
       <button type="submit">Submit</button>
     </form>
 
@@ -33,6 +33,7 @@
 <script>
 import EventService from '@/services/EventService.js'
 import UploadImages from 'vue-upload-drop-images'
+
 export default {
   inject: ['GStore'],
   components: {
@@ -53,13 +54,14 @@ export default {
   methods: {
     saveEvent() {
       Promise.all(
-        this.files.map((file)=>{
+        this.files.map((file) => {
           return EventService.uploadFile(file)
         })
-      ).then((response)=>{
+      ).then((response) => {
         console.log(response)
         console.log('finish upload file')
       })
+
       EventService.saveEvent(this.event)
         .then((response) => {
           console.log(response)
@@ -77,9 +79,8 @@ export default {
           this.$router.push('NetworkError')
         })
     },
-    handleImages(files){
+    handleImages(files) {
       this.files = files
-      // console.log(files)
     }
   }
 }
