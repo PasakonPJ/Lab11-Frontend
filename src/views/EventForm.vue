@@ -46,7 +46,8 @@ export default {
         title: '',
         description: '',
         location: '',
-        organizer: { id: '', name: '' }
+        organizer: { id: '', name: '' },
+        imageUrls: []
       },
       files: []
     }
@@ -57,23 +58,21 @@ export default {
         this.files.map((file) => {
           return EventService.uploadFile(file)
         })
-      ).then((response) => {
-        console.log(response)
-        console.log('finish upload file')
-      })
-
-      EventService.saveEvent(this.event)
+      )
         .then((response) => {
-          console.log(response)
-          this.$router.push({
-            name: 'EventLayout',
-            params: { id: response.data.id }
+          this.event.imageUrls = response.map((r) => r.data)
+          EventService.saveEvent(this.event).then((response) => {
+            console.log(response)
+            this.$router.push({
+              name: 'EventLayout',
+              params: { id: response.data.id }
+            })
+            this.GStore.flashMessage =
+              'You are successfully add a new event for ' + response.data.title
+            setTimeout(() => {
+              this.GStore.flashMessage = ''
+            }, 3000)
           })
-          this.GStore.flashMessage =
-            'You are successfully add a new event for ' + response.data.title
-          setTimeout(() => {
-            this.GStore.flashMessage = ''
-          }, 3000)
         })
         .catch(() => {
           this.$router.push('NetworkError')
